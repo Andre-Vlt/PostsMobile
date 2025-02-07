@@ -5,7 +5,7 @@ export async function LoginCall(username: string, password: string)
 {
     try
     {
-        const response = await axios.post('INSERIR ROTA DE LOGIN',{
+        const response = await axios.post('https://school-bqfd.onrender.com/adm/user/login',{
             username: username,
             password: password
         });
@@ -14,7 +14,7 @@ export async function LoginCall(username: string, password: string)
         {
             const data = response.data;
             await AsyncStorage.setItem('isLoggedIn', 'true');
-            await AsyncStorage.setItem('userId', data.id_user);
+            await AsyncStorage.setItem('userId', data.userId);
             await AsyncStorage.setItem('username', data.username);
         }
         else

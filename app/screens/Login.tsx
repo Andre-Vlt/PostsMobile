@@ -7,7 +7,11 @@ export default function Login() {
     return(
     <Formik 
         initialValues={{username: '', password: ''}}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) =>
+        {
+            //Chamar a função de login
+        }
+        }
     >
         {({handleChange, handleBlur, handleSubmit, values}) =>(
             <View style={styles.container}>
