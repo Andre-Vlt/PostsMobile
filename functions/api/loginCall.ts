@@ -16,14 +16,14 @@ export async function LoginCall(username: string, password: string)
             await AsyncStorage.setItem('isLoggedIn', 'true');
             await AsyncStorage.setItem('userId', data.userId);
             await AsyncStorage.setItem('username', data.username);
+            return response;
         }
-        else
-        {
-            console.log('Erro ao fazer login');
-        }
+
+        return {status: response.status};
     }
     catch(error)
     {
         console.error('Erro ao fazer login: ',error);
+        return {status: 500};
     }
 }

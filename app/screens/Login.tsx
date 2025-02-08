@@ -1,16 +1,50 @@
-import { Button, TextInput, View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
+import { TextInput, View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import { Formik } from "formik";
 import { useState } from "react";
+import { LoginCall } from "../../functions/api/loginCall";
+import { ValidaProfessor } from "../../functions/auxiliares/validaProfessor";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type StackParamList = {
+    Login: undefined;
+    PostList: undefined;
+}
+
+type LoginScreenNavigationProp = StackNavigationProp<StackParamList, 'Login'>;
 
 export default function Login() {
-
+    const navigation = useNavigation<LoginScreenNavigationProp>();
+    const [isTeacher, setIsTeacher] = useState(false);
+    const [visibility, setVisibility] = useState(false);
     return(
     <Formik 
         initialValues={{username: '', password: ''}}
-        onSubmit={(values) =>
+        onSubmit=
         {
-            //Chamar a função de login
-        }
+            async (values) =>
+            {
+                try
+                {
+                    const response = await LoginCall(values.username, values.password);
+                    if(response.status === 200){
+                        navigation.navigate("PostList");
+                    }
+                    else{
+                        console.log('Erro ao fazer login');
+                    }
+                    const validacao = await ValidaProfessor();
+                    setIsTeacher(validacao);
+                    if(isTeacher)
+                    {
+                       setVisibility(true);
+                    }
+                }
+                catch(error)
+                {
+                    console.error('Erro ao fazer login: ',error);
+                }
+            }
         }
     >
         {({handleChange, handleBlur, handleSubmit, values}) =>(
@@ -30,10 +64,9 @@ export default function Login() {
                 />
                 <TouchableOpacity 
                     style= {styles.button}
-                    onPress={ () => handleSubmit}
-                    >
-                    
-                        <Text style = {styles.buttonText}>Entrar</Text>
+                    onPress={ () => handleSubmit()}
+                >
+                    <Text style = {styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
             </View>
         )}

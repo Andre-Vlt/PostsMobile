@@ -8,7 +8,6 @@ export async function GetTeacherById() {
         const response = await axios.get(`https://school-bqfd.onrender.com/adm/teacher/${teacherId}`);
         if(response.status === 200)
         {
-            await AsyncStorage.setItem('isTeacher', 'true');
             return true;
         }
         else
