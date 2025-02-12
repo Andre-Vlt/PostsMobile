@@ -2,7 +2,6 @@ import { TextInput, View, StyleSheet, Image, TouchableOpacity, Text } from "reac
 import { Formik } from "formik";
 import { useState } from "react";
 import { LoginCall } from "../../functions/api/loginCall";
-import { ValidaProfessor } from "../../functions/auxiliares/validaProfessor";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
@@ -32,12 +31,6 @@ export default function Login() {
                     }
                     else{
                         console.log('Erro ao fazer login');
-                    }
-                    const validacao = await ValidaProfessor();
-                    setIsTeacher(validacao);
-                    if(isTeacher)
-                    {
-                       setVisibility(true);
                     }
                 }
                 catch(error)
