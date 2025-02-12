@@ -14,8 +14,10 @@ export async function LoginCall(username: string, password: string)
         {
             const data = response.data;
             await AsyncStorage.setItem('isLoggedIn', 'true');
-            await AsyncStorage.setItem('userId', data.userId);
+            await AsyncStorage.setItem('userId', data.id_user);
             await AsyncStorage.setItem('username', data.username);
+            const idUser = await AsyncStorage.getItem('userId');
+            console.log("LoginCall-> id_user salvo no AsyncStorage:", idUser);
             return response;
         }
 
