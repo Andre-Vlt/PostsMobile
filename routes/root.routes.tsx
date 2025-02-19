@@ -4,12 +4,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import PostList from "../app/screens/PostList";
 import CreatePost from "../app/screens/CriarPost";
 import EditarPost from "../app/screens/EditarPost";
+import LerPost from "../app/screens/LerPost";
 
 type StackParamList = {
     Login: undefined;
     PostList: undefined;
     CreatePost: undefined;
     EditarPost: undefined;
+    LerPost: undefined;
 }
 
 const Stack = createStackNavigator<StackParamList>();
@@ -36,6 +38,11 @@ export default function RootRoutes(){
                 <Stack.Screen
                     name= "EditarPost"
                     component = {EditarPost}
+                    options={{headerShown: false}}
+                    />
+                <Stack.Screen
+                    name= "LerPost"
+                    component = {LerPost}
                     options={{headerShown: false}}
                     />
             </Stack.Navigator>

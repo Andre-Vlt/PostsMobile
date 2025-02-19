@@ -5,6 +5,7 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { fetchPosts } from "../../functions/api/getPosts";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { formatarData } from "../../functions/auxiliares/formatarData";
 
 
 type StackParamList = {
@@ -12,6 +13,7 @@ type StackParamList = {
     PostList:undefined;
     CreatePost:undefined;
     EditarPost: undefined;
+    LerPost: {id: string, title: string, content: string, date: string, subject: string, teacher: string};
 }
 
 export default function PostList() {
@@ -39,9 +41,10 @@ export default function PostList() {
                 ({
                     id: post.id_post,
                     title: post.post_title,
-                    date: post.post_date,
+                    date: formatarData(post.post_date),
                     subject: post.subject_name,
                     teacher: post.teacher_name,
+                    post_text: post.post_text
                 }));
                 setPosts(formattedPosts);
             }else{
@@ -78,7 +81,18 @@ export default function PostList() {
                 data = {posts}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <Card style={{ marginVertical: 5, padding: 10 }}>
+                    <Card style={{ marginVertical: 5, padding: 10 }} onPress=
+                        {
+                            () => navigation.navigate("LerPost",
+                                {
+                                    id: item.id,
+                                    title: item.title,
+                                    content: item.post_text,
+                                    date: item.date,
+                                    subject: item.subject,
+                                    teacher: item.teacher
+                                }
+                                )}>
                         <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.title}</Text>
                         <Text>{item.date}</Text>
                         {visible ? (<IconButton icon="pencil" size={24} onPress={ ()=> {navigation.navigate("EditarPost")} }/>) : null}
