@@ -15,7 +15,6 @@ export async function GetPersonId(){
         if(response.status === 200)
         {
             await AsyncStorage.setItem('personId', response.data.id_person);
-            console.log('GerPersonId-> id_person salvo no AsyncStorage: ',response.data.id_person);
         }
         else
         {

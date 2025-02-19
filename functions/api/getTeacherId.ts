@@ -9,7 +9,6 @@ export async function GetTeacherId() {
         if(response.status === 200)
         {
             await AsyncStorage.setItem('teacherId', response.data.id_teacher);
-            console.log('GetTeacherId-> id_teacher salvo no AsyncStorage: ',response.data.id_teacher);
         }
         else
         {
