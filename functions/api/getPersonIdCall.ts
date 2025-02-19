@@ -8,7 +8,7 @@ export async function GetPersonId(){
         const response = await axios.get(`https://school-bqfd.onrender.com/adm/person/userid/${userId}`)
         if(response.status === 200)
         {
-            await AsyncStorage.setItem('personId', response.data[0].id_person);
+            await AsyncStorage.setItem('personId', response.data.id_person);
         }
         else
         {
