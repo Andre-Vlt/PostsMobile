@@ -64,7 +64,13 @@ export default function PostList() {
             </View>
 
             <View style={styles.topContainer}>
-                <IconButton icon="magnify" size={24} color="#fff" style={styles.searchIcon} />
+                {/* Propriedade color usada diretamente no IconButton */}
+                <IconButton 
+                    icon="magnify" 
+                    size={24}    
+                    color="#fff"    
+                    style={styles.searchIcon}   
+                />
             </View>
 
             {loading ? (
