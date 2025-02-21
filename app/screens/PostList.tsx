@@ -15,7 +15,7 @@ type StackParamList = {
     Login: undefined;
     PostList: undefined;
     CreatePost: undefined;
-    EditarPost: undefined;
+    EditarPost: { id: string, title: string, content: string };
     LerPost: { id: string, title: string, content: string, date: string, subject: string, teacher: string };
 }
 
@@ -160,7 +160,7 @@ export default function PostList() {
                                             icon="pencil"
                                             iconColor="#ff7f7f"
                                             size={27}
-                                            onPress={() => {navigation.navigate("EditarPost")}}
+                                            onPress={() => {navigation.navigate("EditarPost",{id: item.id, title: item.title, content: item.post_text})}}
                                         />
                                         <IconButton 
                                             icon="trash-can"
