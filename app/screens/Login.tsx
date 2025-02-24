@@ -8,7 +8,7 @@ import { LoginCall } from "../../functions/api/loginCall";
 
 type StackParamList = {
     Login: undefined;
-    PostList: undefined;
+    PostListDrawer: undefined;
 };
 
 type LoginScreenNavigationProp = StackNavigationProp<StackParamList, 'Login'>;
@@ -35,7 +35,7 @@ export default function Login() {
                             try {
                                 const response = await LoginCall(values.username, values.password);
                                 if(response.status === 200){
-                                    navigation.navigate("PostList");
+                                    navigation.navigate("PostListDrawer");
                                 } else {
                                     console.log('Erro ao fazer login');
                                 }

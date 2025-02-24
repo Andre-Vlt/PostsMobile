@@ -10,13 +10,20 @@ import { GetUserData } from "../../functions/api/getUserData";
 import { DeletePost } from "../../functions/api/deletePost";
 import { TextInput } from "react-native-gesture-handler";
 import { SearchPost } from "../../functions/api/searchPost.ts";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 type StackParamList = {
     Login: undefined;
     PostList: undefined;
-    CreatePost: undefined;
     EditarPost: { id: string, title: string, content: string };
     LerPost: { id: string, title: string, content: string, date: string, subject: string, teacher: string };
+}
+
+type DrawerParamList = {
+    PostList: undefined;
+    CreatePost: undefined;
+    CreateStudent: undefined;
+    CreateTeacher: undefined;
 }
 
 type User = {
@@ -37,6 +44,7 @@ export default function PostList() {
     const [searchText, setSearchText] = useState('');
     const [filteredPosts, setFilteredPosts] = useState([]);
     const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+    const drawerNavigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
 
 
     const loadPosts = async () => {
@@ -102,22 +110,12 @@ export default function PostList() {
         <View style={styles.container}>
             {/* Topo com logo à esquerda e nome do aluno à direita */}
             <View style={styles.header}>
+                <Button onPress={() => drawerNavigation.toggleDrawer()}>☰</Button>
                 <Image source={require('../../assets/images/Books.png')} style={styles.logo} />
                 <Text style={styles.studentName}>{userData.name}</Text>
             </View>
 
             <View style={styles.topContainer}>
-                {
-                    visible ? (
-                        <Button 
-                            icon="plus"
-                            mode="contained"
-                            onPress={() => navigation.navigate("CreatePost")}
-                        >
-                            Criar Post
-                        </Button>
-                    ):null
-                }
                 <IconButton 
                     icon="magnify"
                     size={24}
