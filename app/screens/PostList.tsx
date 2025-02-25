@@ -11,6 +11,7 @@ import { DeletePost } from "../../functions/api/deletePost";
 import { TextInput } from "react-native-gesture-handler";
 import { SearchPost } from "../../functions/api/searchPost.ts";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { ValidaProfessor } from "../../functions/auxiliares/validaProfessor";
 
 type StackParamList = {
     Login: undefined;
@@ -50,6 +51,7 @@ export default function PostList() {
     const loadPosts = async () => {
         try {
             setLoading(true);
+            await ValidaProfessor();
             if (await AsyncStorage.getItem('isTeacher') === 'true') {
                 setVisible(true);
             }

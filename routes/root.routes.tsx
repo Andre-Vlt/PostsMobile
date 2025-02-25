@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { DrawerActions, NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,7 +12,7 @@ import EditarPost from "../app/screens/EditarPost";
 import LerPost from "../app/screens/LerPost";
 import CreateStudent from "../app/screens/CriarAluno";
 import CreateTeacher from "../app/screens/CriarProfessor";
-import { Button } from "react-native";
+import { ValidaProfessor } from "../functions/auxiliares/validaProfessor";
 
 type StackParamList = {
     Login: undefined;
@@ -46,12 +46,13 @@ function PostListDrawer() {
     
     useEffect(() => {
         const loadVisible = async () => {
-            try {
-                const isTeacher = await AsyncStorage.getItem('isTeacher');
-                if (isTeacher === 'true') {
-                    setVisible(true);
-                }
-            } catch (error) {
+            try 
+            {
+                const isTeacher = await ValidaProfessor();
+                setVisible(isTeacher);
+            }
+            catch (error)
+            {
                 console.error(error);
             }
         };

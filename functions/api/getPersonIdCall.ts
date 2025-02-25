@@ -5,7 +5,6 @@ export async function GetPersonId(){
     try
     {
         const userId = await AsyncStorage.getItem('userId');
-        console.log('GetPersonId-> userId: ',userId);
 
         if(!userId){
             console.error('Erro: userId não encontrado no AsyncStorage');
@@ -18,7 +17,7 @@ export async function GetPersonId(){
         }
         else
         {
-            console.log('Erro ao buscar id da pessoa');
+            console.error('Erro ao buscar id da pessoa: ',response);
         }
     }
     catch(error)

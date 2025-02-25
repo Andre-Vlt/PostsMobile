@@ -8,21 +8,26 @@ export async function ValidaProfessor() {
     {
         await GetPersonId();
         await GetTeacherId();
-        await GetTeacherById();
+        const teacherId = await GetTeacherById();
 
-        if(await GetTeacherById())
+        if(teacherId)
         {
             await AsyncStorage.setItem('isTeacher', 'true');
+            console.log(`isteacher: true`)
             return true;
         }
         else
         {
             await AsyncStorage.setItem('isTeacher', 'false');
+            console.log(`isteacher: false`)
             return false;
         }
     }
     catch(error)
     {
-        console.error('Erro: ',error);
+        if(error.response.status === 404)
+        {
+            console.log('Não é professor');
+        }
     }
 }

@@ -17,7 +17,9 @@ export async function GetTeacherById() {
     }
     catch(error)
     {
-        console.error('Erro ao buscar professor por id: ',error);
-        return false;
+        if(error.response && error.response.status === 404)
+        {
+            return false;
+        }
     }
 }

@@ -6,17 +6,18 @@ export async function GetTeacherId() {
     {
         const personId = await AsyncStorage.getItem('personId');
         const response = await axios.get(`https://school-bqfd.onrender.com/adm/teacher/person/${personId}`);
-        if(response.status === 200)
+        if(response.status === 200 && response.data)
         {
             await AsyncStorage.setItem('teacherId', response.data.id_teacher);
-        }
-        else
-        {
-            console.log('Erro ao buscar id do professor');
+            return response.data.id_teacher;
         }
     }
     catch(error)
     {
-        console.error('Erro ao buscar id do professor: ',error);
+        if(error.response && error.response.status === 404)
+        {
+            await AsyncStorage.setItem('teacherId', '');
+            return null;
+        }
     }
 }
