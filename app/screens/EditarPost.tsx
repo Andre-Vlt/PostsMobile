@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#151f71", // Cor de fundo
+    backgroundColor: "#fff", // Cor de fundo
     padding: 25,
   },
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: "#fdb5a5", // Cor primária (rosa claro)
+    color: "#151f71", // Cor primária (azul escuro)
     marginBottom: 40,
     textAlign: "center",
     letterSpacing: 1.2, // Para um toque mais sofisticado
