@@ -2,7 +2,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 import Login from "../app/screens/Login";
@@ -13,6 +12,8 @@ import LerPost from "../app/screens/LerPost";
 import CreateStudent from "../app/screens/CriarAluno";
 import CreateTeacher from "../app/screens/CriarProfessor";
 import { ValidaProfessor } from "../functions/auxiliares/validaProfessor";
+import TeacherList from "../app/screens/ListarProfessores";
+import StudentList from "../app/screens/ListarAlunos";
 
 type StackParamList = {
     Login: undefined;
@@ -27,7 +28,6 @@ const Stack = createStackNavigator<StackParamList>();
 const Drawer = createDrawerNavigator();
 
 function PostListStack() {
-    const navigation = useNavigation();
     return (
         <Stack.Navigator id={undefined}>
             <Stack.Screen 
@@ -68,29 +68,31 @@ function PostListDrawer() {
                 name="PostList"
                 component={PostListStack}
                 />
+            <Drawer.Screen name="CreateStudent" component={CreateStudent} />
+            <Drawer.Screen name="StudentList" component={StudentList} />
+
             {visible && (
                 <Drawer.Screen 
                     name="CreatePost"
                     component={CreatePost}
                     /> 
                 )}
-            <Drawer.Screen name="CreateStudent" component={CreateStudent} />
-                {visible && (
+            {visible && (
                 <Drawer.Screen
                     name="CreateTeacher"
                     component={CreateTeacher}
                     />
                 )}
+            {visible && (
+                <Drawer.Screen
+                    name="TeacherList"
+                    component={TeacherList}
+                    />
+            )}
         </Drawer.Navigator>
     );
 }
-function AuthStack() {
-    return (
-        <Stack.Navigator id={undefined}>
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        </Stack.Navigator>
-    );
-}
+
 export default function RootRoutes() {
     return (
         <NavigationContainer>
