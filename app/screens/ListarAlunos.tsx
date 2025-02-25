@@ -6,7 +6,7 @@ import { Card, IconButton } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 type StackParamList = {
-    EditarAluno: undefined;
+    EditarAluno: { student: any };
 }
 export default function StudentList(){
     const [students, setStudents] = useState([]);
@@ -46,7 +46,7 @@ export default function StudentList(){
                             <View>
                                 <Text>{item.student_name}</Text>
                                 <Text>{item.grade}</Text>
-                                <IconButton icon = "pencil" onPress={() => navigation.navigate("EditarAluno")} />
+                                <IconButton icon = "pencil" onPress={() => navigation.navigate("EditarAluno", { student: item})} />
                             </View>
                         </Card>
                     )} />)}
