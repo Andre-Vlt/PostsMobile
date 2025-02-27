@@ -35,17 +35,18 @@ export default function CreatePost() {
         const fetchTeacherId = async () => {
             const teacherId = await AsyncStorage.getItem('teacherId');
             setIdTeacher(teacherId);
-        }
+        };
         fetchTeacherId();
     }, []);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Criar Post</Text>
+            <Text style={styles.header}>Criar Conteúdos</Text>
+            
             <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate("PostList")}>
                 <Text style={styles.backButtonText}>Voltar</Text>
             </TouchableOpacity>
-            
+
             <Formik
                 initialValues={{
                     id_teacher: idTeacher,
@@ -82,18 +83,20 @@ export default function CreatePost() {
                             value={values.post_text}
                             multiline
                         />
-                        <Picker
-                            selectedValue={values.id_subject}
-                            style={styles.picker}
-                            onValueChange={(itemValue) => setFieldValue('id_subject', itemValue)}
-                        >
-                            <Picker.Item label="Selecione uma matéria" value="" />
-                            {subjects.map((subject) => (
-                                <Picker.Item key={subject.id} label={subject.name} value={subject.id} />
-                            ))}
-                        </Picker>
+                        <View style={styles.pickerContainer}>
+                            <Picker
+                                selectedValue={values.id_subject}
+                                style={styles.picker}
+                                onValueChange={(itemValue) => setFieldValue('id_subject', itemValue)}
+                            >
+                                <Picker.Item label="Selecione uma matéria" value="" />
+                                {subjects.map((subject) => (
+                                    <Picker.Item key={subject.id} label={subject.name} value={subject.id} />
+                                ))}
+                            </Picker>
+                        </View>
                         <TouchableOpacity style={styles.submitButton} onPress={() => handleSubmit()}>
-                            <Text style={styles.submitButtonText}>Criar Post</Text>
+                            <Text style={styles.submitButtonText}>Criar</Text>
                         </TouchableOpacity>
                     </View>
                 )}
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     header: {
-        fontSize: 24,
+        fontSize: 26,
         fontWeight: 'bold',
         color: colors.darkBlue,
         textAlign: 'center',
@@ -118,49 +121,79 @@ const styles = StyleSheet.create({
     },
     backButton: {
         backgroundColor: colors.darkBlue,
-        padding: 10,
+        padding: 12,
         borderRadius: 10,
         alignItems: 'center',
         marginBottom: 20
     },
     backButtonText: {
         color: colors.white,
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     form: {
         backgroundColor: colors.white,
         padding: 20,
-        borderRadius: 10
+        borderRadius: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 5
     },
     input: {
         borderWidth: 1,
         borderColor: colors.secondary,
-        padding: 10,
-        borderRadius: 8,
-        marginBottom: 10,
-        color: colors.darkBlue
+        padding: 12,
+        borderRadius: 10,
+        marginBottom: 12,
+        color: colors.darkBlue,
+        fontSize: 16,
+        backgroundColor: "#fff",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+        elevation: 2
     },
     textArea: {
-        height: 100,
+        height: 120,
         textAlignVertical: 'top'
     },
-    picker: {
+    pickerContainer: {
         borderWidth: 1,
         borderColor: colors.secondary,
-        borderRadius: 8,
-        marginBottom: 10
+        borderRadius: 10,
+        marginBottom: 12,
+        backgroundColor: "#fff",
+        paddingHorizontal: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+        elevation: 2
+    },
+    picker: {
+        height: 50,
+        width: "100%"
     },
     submitButton: {
         backgroundColor: colors.accent,
-        padding: 15,
+        paddingVertical: 15,
         borderRadius: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3
     },
     submitButtonText: {
         color: colors.white,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold'
     }
 });
+
 
 
