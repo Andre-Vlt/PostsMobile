@@ -15,6 +15,7 @@ import { ValidaProfessor } from "../functions/auxiliares/validaProfessor";
 import TeacherList from "../app/screens/ListarProfessores";
 import StudentList from "../app/screens/ListarAlunos";
 import EditarAluno from "../app/screens/EditarAluno";
+import EditarProfessor from "../app/screens/EditarProfessor";
 
 type StackParamList = {
     Login: undefined;
@@ -24,6 +25,7 @@ type StackParamList = {
     LerPost: undefined;
     PostListDrawer: undefined;
     EditarAluno: { student: any };
+    EditarProfessor: { teacher: any };
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -106,6 +108,7 @@ export default function RootRoutes() {
                     options={{ headerShown: false }}
                     />
                 <Stack.Screen name="EditarAluno" component={EditarAluno} options={{ headerShown: false }} />
+                <Stack.Screen name="EditarProfessor" component={EditarProfessor} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
